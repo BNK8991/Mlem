@@ -39,7 +39,7 @@ app.get('/delete', async function (req, res) {
 app.get('/add', function (req, res) {
     res.render('updateSanPham');
 })
-app.get('/login', function (req, res) { //cái này chỉ để cho đẹp thôi chứ không login được. Tạo ra chỉ để đưa cái trang login vào để chụp rồi cho vào báo cáo
+app.get('/login', function (req, res) { //login page that is only for cosmetic lol
     res.render('login');
 })
 
