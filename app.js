@@ -16,7 +16,7 @@ var publicDir = require('path').join(__dirname, '/public');
 app.use(express.static(publicDir));
 
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb+srv://hoaison2204:Son22042000@cluster0.cnlb1.mongodb.net/test';
+var url = 'mongodb+srv://User0:user0@cluster0.jqwtm.mongodb.net/test';
 
 app.get('/', async function (req, res) {                                        //async khai bao ham bat dong bo - await tam dung ham bat dong bo
     let client = await MongoClient.connect(url);
