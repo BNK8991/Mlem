@@ -43,24 +43,34 @@ app.get('/login', function (req, res) { //login page that is only for cosmetic l
     res.render('login');
 })
 
-if (name.length() > 10)
-{
-
-}
-
 app.post('/doAddproduct', async function (req, res) {
     let client = await MongoClient.connect(url);
     var objectID = require('mongodb').objectID;
 
-    let dbo = client.db("GCH0719"); // There is another db called "ToyManager"
-    let _id = req.body.txt_id;
     if (name.length() > 10)
     {
+        let newProduct = { _id: _id, name: name, price: price };
+        let dbo = client.db("GCH0719"); // There is another db called "ToyManager"
+        let _id = req.body.txt_id;
         let name = req.body.txtName;
-    }
         let price = req.body.txtPrice;
-    let newProduct = { _id: _id, name: name, price: price };
-    await dbo.collection("Product").insertOne(newProduct);
+        let newProduct = { _id: _id, name: name, price: price };
+        await dbo.collection("Product").insertOne(newProduct);
+    }
+    else
+    {
+        alert("Nope")
+        res.redirect('/');
+    }
+
+    // let dbo = client.db("GCH0719"); // There is another db called "ToyManager"
+    // let _id = req.body.txt_id;
+    // let name = req.body.txtName;
+    // let price = req.body.txtPrice;
+    // let newProduct = { _id: _id, name: name, price: price };
+    // await dbo.collection("Product").insertOne(newProduct);
+
+
     // console.log(newProduct);
 
     res.redirect('/');
