@@ -44,16 +44,29 @@ app.get('/login', function (req, res) { //login page that is only for cosmetic l
 })
 
 app.post('/doAddproduct', async function (req, res) {
-    let dbo = client.db("GCH0719"); // There is another db called "ToyManager"
-    let _id = req.body.txt_id;
-    let name = req.body.txtName;
-    let price = req.body.txtPrice;
-    let newProduct = { _id: _id, name: name, price: price };
-    await dbo.collection("Product").insertOne(newProduct);
+    if (name.length() > 10) {
+        let dbo = client.db("GCH0719"); // There is another db called "ToyManager"
+        let _id = req.body.txt_id;
+        let name = req.body.txtName;
+        let price = req.body.txtPrice;
+        let newProduct = { _id: _id, name: name, price: price };
+        await dbo.collection("Product").insertOne(newProduct);
 
-    // console.log(newProduct);
+        // console.log(newProduct);
 
-    res.redirect('/');
+        res.redirect('/');
+    }
+
+    // let dbo = client.db("GCH0719"); // There is another db called "ToyManager"
+    // let _id = req.body.txt_id;
+    // let name = req.body.txtName;
+    // let price = req.body.txtPrice;
+    // let newProduct = { _id: _id, name: name, price: price };
+    // await dbo.collection("Product").insertOne(newProduct);
+
+    // // console.log(newProduct);
+
+    // res.redirect('/');
 })
 
 const PORT = process.env.PORT || 5000
