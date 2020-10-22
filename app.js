@@ -43,15 +43,9 @@ app.get('/login', function (req, res) { //login page that is only for cosmetic l
     res.render('login');
 })
 
-functions.validate()
+if (name.length() > 10)
 {
-    if(name < 10)
-    {
-        name = "null"
-    }
-    else{
-        let name = req.body.txtName;
-    }
+
 }
 
 app.post('/doAddproduct', async function (req, res) {
@@ -60,9 +54,11 @@ app.post('/doAddproduct', async function (req, res) {
 
     let dbo = client.db("GCH0719"); // There is another db called "ToyManager"
     let _id = req.body.txt_id;
-    let name = req.body.txtName;
-    let price = req.body.txtPrice;
-
+    if (name.length() > 10)
+    {
+        let name = req.body.txtName;
+    }
+        let price = req.body.txtPrice;
     let newProduct = { _id: _id, name: name, price: price };
     await dbo.collection("Product").insertOne(newProduct);
     // console.log(newProduct);
