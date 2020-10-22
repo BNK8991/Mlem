@@ -43,6 +43,14 @@ app.get('/login', function (req, res) { //login page that is only for cosmetic l
     res.render('login');
 })
 
+functions.validate()
+{
+    if(name < 10)
+    {
+        name = "null"
+    }
+}
+
 app.post('/doAddproduct', async function (req, res) {
     let client = await MongoClient.connect(url);
     var objectID = require('mongodb').objectID;
