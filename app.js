@@ -44,11 +44,12 @@ app.get('/login', function (req, res) { //login page that is only for cosmetic l
 })
 
 app.post('/doAddproduct', async function (req, res) {
-    let client = await MongoClient.connect(url);
-    var objectID = require('mongodb').objectID;
-
     if (name.length() > 10)
     {
+        let client = await MongoClient.connect(url);
+        var objectID = require('mongodb').objectID;
+
+    
         let newProduct = { _id: _id, name: name, price: price };
         let dbo = client.db("GCH0719"); // There is another db called "ToyManager"
         let _id = req.body.txt_id;
