@@ -56,7 +56,6 @@ app.post('/doAddproduct', async function (req, res) {
 
         res.redirect('/');
     }
-
     // let dbo = client.db("GCH0719"); // There is another db called "ToyManager"
     // let _id = req.body.txt_id;
     // let name = req.body.txtName;
