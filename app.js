@@ -49,6 +49,9 @@ functions.validate()
     {
         name = "null"
     }
+    else{
+        let name = req.body.txtName;
+    }
 }
 
 app.post('/doAddproduct', async function (req, res) {
