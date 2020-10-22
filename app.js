@@ -31,7 +31,7 @@ app.get('/delete', async function (req, res) {
     let condition = { "_id": ObjectID(id) };
 
     let client = await MongoClient.connect(url);
-    let dbo = client.db("GCH0719"); // There is another db called "ToyManager"
+    let dbo = client.db("GCH0719");                         // There is another db called "ToyManager"
     await dbo.collection("Product").deleteOne(condition);
     res.redirect('/');
 })
