@@ -18,7 +18,7 @@ app.use(express.static(publicDir));
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb+srv://User0:user0@cluster0.jqwtm.mongodb.net/test';
 
-app.get('/', async function (req, res) {                                        //async khai bao ham bat dong bo - await tam dung ham bat dong bo
+app.get('/', async function (req, res) {                                        //home page
     let client = await MongoClient.connect(url);
     let dbo = client.db("GCH0719");
     let results = await dbo.collection("Product").find({}).toArray();
@@ -43,18 +43,21 @@ app.get('/login', function (req, res) { //login page that is only for cosmetic l
     res.render('login');
 })
 
-app.post('/doAddproduct', async function (req, res) 
-{
+app.post('/doAddproduct', async function (req, res) {
     let dbo = client.db("GCH0719"); // There is another db called "ToyManager"
     let _id = req.body.txt_id;
     let name = req.body.txtName;
     let price = req.body.txtPrice;
-    if (name.length() > 10)
-    {
-        let newProduct = { _id: _id, name: name, price: price };
-        await dbo.collection("Product").insertOne(newProduct);
-        res.redirect('/');
+    if (name != null && name.length < 10) {
+        res.render('doAddproduct', {
+            error: { nameError: 'Length must > 10' },
+            oldValues: { _id: _id, name: name, price: price }
+        })
+        return;
     }
+    let newProduct = { "_id": _id, "name": name, "price": price };
+    await dbo.collection("Product").insertOne(newProduct);
+    res.redirect('/');
     // let dbo = client.db("GCH0719"); // There is another db called "ToyManager"
     // let _id = req.body.txt_id;
     // let name = req.body.txtName;
@@ -63,11 +66,7 @@ app.post('/doAddproduct', async function (req, res)
     // await dbo.collection("Product").insertOne(newProduct);
 
     // // console.log(newProduct);
-    else
-    {
-        res.redirect('/');
-    }
-    
+
 })
 
 const PORT = process.env.PORT || 5000
