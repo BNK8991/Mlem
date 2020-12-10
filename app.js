@@ -25,7 +25,7 @@ app.get('/', async function (req, res) {                                        
     res.render('allSanPham', { sanPham: results });
 })
 
-app.get('/delete', async function (req, res) {
+app.get('/delete', async function (req, res) { // /delete function
     let id = req.query.id;
     var ObjectID = require('mongodb').ObjectID;
     let condition = { "_id": ObjectID(id) };
